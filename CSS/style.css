@@ -1,0 +1,91 @@
+body {
+  font-family: "Luckiest Guy", cursive;
+  background: #fddec0;
+  color: #ffff;
+}
+body:hover{
+  cursor:url("/cursors/cur1089.cur"), auto;
+}
+h1 {
+  background: #5d8584;
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-style: normal;
+  font-weight: 400;
+}
+h5 {
+    width: 20%;
+  color: #5d8584;
+  border-bottom: 1px solid #5d8584;
+  margin: 0 auto;
+}
+img {
+  max-width: 100%;
+  border-radius: 16px;
+  border: 3px solid #5d8584;
+  
+}
+img:hover{
+  cursor:url("/cursors/oth79.cur"), auto;
+}
+.dash{
+  border-radius: 10px;
+  border: 3px dashed #5d8584;
+  padding:8px 5px;
+}
+.remove-border{
+  border: none;
+}
+.mute-button{
+  border-radius: 16px;
+  font-size: 20px;
+  padding: 8px 16px;
+  background: #5d8584;
+  outline: none;
+  border: none;
+  color: inherit;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  transition: all 200 ease-in-out;
+}
+.mute-button:hover{
+  color: #5d8584;
+  background: #ffff;
+  cursor:url("/cursors/oth79.cur"), auto;
+
+}
+/* ------------------------------ */
+.overlay-text {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  color: #5d8584;
+}
+
+.overlay-text-small {
+  font-size: .3em;
+}
+/* you must add visible class from javascript */
+.overlay-text.visible {
+  display: flex;
+  flex-direction: column;
+  animation: overlay-grow 500ms forwards;
+}
+@keyframes overlay-grow {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 0;
+  }
+  to {
+    background-color: rgba(0, 0, 0, .8);
+    font-size: 10em;
+  }
+}
