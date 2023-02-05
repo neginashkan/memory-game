@@ -169,7 +169,7 @@ function game() {
     twoChosenCardsId.push(clickedCardId);
     twoChosenCardsName.push(clickedCardName);
     if (twoChosenCardsName.length === 2) {
-      setTimeout(checkForMatch, 500);
+      setTimeout(checkForMatch, 600);
     }
   }
   // show it in html
