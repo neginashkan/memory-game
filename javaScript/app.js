@@ -35,55 +35,53 @@ class AudioController {
   }
 }
 let audioController = new AudioController();
-
 // --------------------------------------
 const addByJavaScript = document.getElementById("add-by-javaScript");
 const timeEl = document.getElementById("time");
 // --------------------------------------
-// let timeLeft = 90;
-// timerId = setInterval(countdown, 1000);
-// const timeEl = document.getElementById("time");
-//     function countdown() {
-//       if (timeLeft == -1) {
-//         clearTimeout(timerId);
-//         document.getElementById("game-over-text").classList.add("visible");
-//         audioController.gameOver();
-//         addByJavaScript.textContent = "";
-//         randersGame();
-//       } else {
-//         timeEl.textContent = timeLeft;
-//         timeLeft--;
-//       }
-//     }
-// --------------------------------------------------
-let seconds = 90;
-// function startClickGameTime(){
-//   let timer = setInterval(() => {
-//     timeEl.textContent = seconds;
-//     seconds--;
-//     if (seconds < 0) {
-//       clearInterval(timer);
-//     }
-//   }, 1000);
-
-// }
-
-function stopTimer() {
-  clearInterval(timer);
-  timeEl.textContent = seconds;
-}
-
-
+let victory = false;
 function startTimer() {
-  timer = setInterval(()=> {
-    timeEl.textContent = seconds;
-    seconds--;
-    if (seconds < 0) {
-      clearInterval(timer);
-      timeEl.textContent = seconds;
+  let timeLeft = Number(timeEl.textContent);
+  let timerId = setInterval(countdown, 1000);
+  function countdown() {
+    if (timeLeft == -1) {
+      clearTimeout(timerId);
+      document.getElementById("game-over-text").classList.add("visible");
+      audioController.gameOver();
+      addByJavaScript.textContent = "";
+      randersGame();
+    } else {
+      if (victory === true) {
+        clearTimeout(timerId);
+        victory = false;
+      }
+      timeEl.textContent = timeLeft;
+      timeLeft--;
     }
-  }, 1000);
+  }
 }
+// --------------------------------------------------
+
+// musicButton.addEventListener('click',()=>{
+//   if(musicButton.textContent='on'){
+//     musicButton.textContent = "off";
+//   }else if(musicButton.textContent='off'){
+
+//   }
+// })
+const musicButton = document.getElementById("button");
+musicButton.addEventListener("click", () => {
+  const icon = document.getElementById("icon");
+  if (musicButton.value == "ON") {
+    audioController.startMusic()
+    icon.innerHTML = `<i class="fas fa-music"></i>`;
+    musicButton.value = "OFF";
+  } else if (musicButton.value == "OFF") {
+    audioController.stopMusic()
+    icon.innerHTML = `off`;
+    musicButton.value = "ON";
+  }
+});
 // --------------------------------------------------
 function game() {
   const allCards = [
@@ -150,9 +148,9 @@ function game() {
     const score = matchCards.length;
     scoreEL.textContent = score;
     if (score === allCards.length / 2) {
+      victory = true;
       document.getElementById("victory-text").classList.add("visible");
       audioController.victory();
-      // stopTimer();
       addByJavaScript.textContent = "";
       randersGame();
     }
@@ -201,9 +199,10 @@ const allOverlayText = Array.from(document.querySelectorAll(".overlay-text"));
 function ready() {
   allOverlayText.forEach((eachOverlayText) =>
     eachOverlayText.addEventListener("click", () => {
-      // startTimer()
       eachOverlayText.classList.remove("visible");
       audioController.startMusic();
+      timeEl.textContent = "90";
+      startTimer();
       const scoreEL = document.getElementById("score");
       scoreEL.textContent = 0;
     })
@@ -216,5 +215,3 @@ function randersGame() {
 randersGame();
 
 //? mute icon of on button
-//? fix time
-//? time over game over
